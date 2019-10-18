@@ -19,8 +19,7 @@ const TodoForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     setTask([...task, input]);
-    // resetting input field. At this point pressing button does not reset the field, only hitting enter?
-    setInput({ task: "" });
+    setInput({ task: "", id: Date.now(), completed: false });
 
     // Below throws this error-- A component is changing a controlled input of type text to be uncontrolled. Input elements should not switch from controlled to uncontrolled (or vice versa).
     //    Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://fb.me/react-controlled-components
@@ -41,7 +40,8 @@ const TodoForm = () => {
       </form>
       <div>
           {/* Had to add onClick with handle submit to get button to work? */}
-        <button onClick={handleSubmit}>Add Todo</button>
+          {/* {So far button does not work without an Onclick, type="submit" also does not work} */}
+        <button>Add Todo</button>
         <button>Clear Completed</button>
       </div>
     </div>
@@ -52,29 +52,9 @@ export default TodoForm;
 
 // Commit Notes, for myself 
 
-// At this point Button click and hitting enter returns this in console,  
-// only first one returning the complete object, last two only returning the task. Onclick in button doing this?
- 
-// [
-//     {
-//       "name": "State",
-//       "value": [
-//         {
-//           "task": "More stuff",
-//           "id": 1571415349401,
-//           "completed": false
-//         },
-//         {
-//           "task": "And more stuff"
-//         }
-//       ],
-//       "subHooks": []
-//     },
-//     {
-//       "name": "State",
-//       "value": {
-//         "task": ""
-//       },
-//       "subHooks": []
-//     }
-//   ]
+
+// originally had this in handleSubmit, this is why the second and all inputs after were not saving correctly.  
+  // setInput({ task: ""})
+
+//   replaced with Not it works
+//   setInput({ task: "", id: Date.now(), completed: false });
