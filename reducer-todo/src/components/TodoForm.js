@@ -3,7 +3,7 @@ import React, { useState, useReducer } from "react";
 
 const TodoForm = () => {
   // created empty array to store created Objects from input.
-  const [task, setTask] = useState([]);
+  const [list, setList] = useState([]);
   const [input, setInput] = useState({
     task: "",
     id: Date.now(),
@@ -18,15 +18,16 @@ const TodoForm = () => {
   // Taking Input values and saving to task array
   const handleSubmit = e => {
     e.preventDefault();
-    setTask([...task, input]);
+    setList([...list, input]);
     setInput({ task: "", id: Date.now(), completed: false });
 
-    // Below throws this error-- A component is changing a controlled input of type text to be uncontrolled. Input elements should not switch from controlled to uncontrolled (or vice versa).
-    //    Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://fb.me/react-controlled-components
-    //   setInput('')
   };
 
-  console.log("task", task);
+  const toggleComplete = (e, todoId) =>{
+
+  }
+
+  console.log("task", list);
   console.log("input", input);
   return (
     <div>
@@ -41,7 +42,7 @@ const TodoForm = () => {
       <div>
           {/* Had to add onClick with handle submit to get button to work? */}
           {/* {So far button does not work without an Onclick, type="submit" also does not work} */}
-        <button>Add Todo</button>
+        <button onClick={handleSubmit}>Add Todo</button>
         <button>Clear Completed</button>
       </div>
     </div>
