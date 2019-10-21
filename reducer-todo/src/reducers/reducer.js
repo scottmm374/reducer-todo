@@ -13,7 +13,15 @@ export function reducer(state, action) {
             task: action.payload,
             id: Date.now(),
             completed: false     
-        })
+        });
+        case "TOGGLE_COMPLETE":
+          return state.map(task => {
+            if(task.id === action.payload) {
+              return {...task, completed: !task.completed};
+            }else {
+              return task;
+            }
+          });
 
     default:
       return state;

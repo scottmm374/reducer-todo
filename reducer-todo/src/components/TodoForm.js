@@ -1,5 +1,6 @@
 import React, { useState, useReducer } from "react";
 import { initialState, reducer } from "../reducers/reducer";
+import TaskList from './TaskList'
 
 const TodoForm = () => {
   // created empty array to store created Objects from input.
@@ -15,20 +16,25 @@ const TodoForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch({type: 'ADD_TASK', payload: input})
-    // dispatch([...list, input]);
-    // setInput('');
+    setInput('');
 
   };
 
-  // const toggleComplete = (e, todoId) =>{
-
-  // }
+  const toggleComplete = task =>{
+    dispatch({ type: 'TOGGLE_COMPLETE', payload: task.id})
+  }
 
   console.log("task", state);
   // console.log("input", input);
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+    <div>
+        <TaskList 
+          task={state}
+          toggleComplete={toggleComplete}/>
+      </div>
+     
+      <form  onSubmit={handleSubmit}>
         <input
           type="text"
           name="task"
@@ -36,11 +42,12 @@ const TodoForm = () => {
           onChange={handleChange}
         />
       </form>
+    
       <div>
         <button onClick={handleSubmit}>Add Todo</button>
         <button>Clear Completed</button>
       </div>
-    </div>
+      </div>
   );
 };
 
