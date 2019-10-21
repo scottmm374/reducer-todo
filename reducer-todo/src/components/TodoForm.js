@@ -1,47 +1,42 @@
 import React, { useState, useReducer } from "react";
-// import { initialState, reducer } from "../reducers/reducer";
+import { initialState, reducer } from "../reducers/reducer";
 
 const TodoForm = () => {
   // created empty array to store created Objects from input.
-  const [list, setList] = useState([]);
-  const [input, setInput] = useState({
-    task: "",
-    id: Date.now(),
-    completed: false
-  });
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [input, setInput] = useState('');
 
   //setting input values for Form
   const handleChange = e => {
-    setInput({ ...input, [e.target.name]: e.target.value });
+    setInput( e.target.value );
   };
 
   // Taking Input values and saving to task array
   const handleSubmit = e => {
     e.preventDefault();
-    setList([...list, input]);
-    setInput({ task: "", id: Date.now(), completed: false });
+    dispatch({type: 'ADD_TASK', payload: input})
+    // dispatch([...list, input]);
+    // setInput('');
 
   };
 
-  const toggleComplete = (e, todoId) =>{
+  // const toggleComplete = (e, todoId) =>{
 
-  }
+  // }
 
-  console.log("task", list);
-  console.log("input", input);
+  console.log("task", state);
+  // console.log("input", input);
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="task"
-          value={input.task}
+          value={input}
           onChange={handleChange}
         />
       </form>
       <div>
-          {/* Had to add onClick with handle submit to get button to work? */}
-          {/* {So far button does not work without an Onclick, type="submit" also does not work} */}
         <button onClick={handleSubmit}>Add Todo</button>
         <button>Clear Completed</button>
       </div>
