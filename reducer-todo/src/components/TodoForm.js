@@ -24,6 +24,10 @@ const TodoForm = () => {
     dispatch({ type: 'TOGGLE_COMPLETE', payload: task.id})
   }
 
+  const clearCompleted = () => {
+    dispatch({type: 'CLEAR_COMPLETED'})
+  }
+
   console.log("task", state);
   // console.log("input", input);
   return (
@@ -45,7 +49,7 @@ const TodoForm = () => {
     
       <div>
         <button onClick={handleSubmit}>Add Todo</button>
-        <button>Clear Completed</button>
+        <button onClick={clearCompleted}>Clear Completed</button>
       </div>
       </div>
   );
