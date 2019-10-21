@@ -1,12 +1,14 @@
-import React from 'react';
-import './App.css';
-import TodoForm from './components/TodoForm'
+import React from "react";
+import { Container } from "reactstrap";
+import "./App.css";
+import TodoForm from "./components/TodoForm";
 
 function App() {
   return (
-    <div className="App">
+    <Container className="App">
+      <h1>Todo-Reducers</h1>
       <TodoForm />
-    </div>
+    </Container>
   );
 }
 
